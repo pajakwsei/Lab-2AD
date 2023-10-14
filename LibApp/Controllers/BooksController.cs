@@ -64,7 +64,7 @@ namespace LibApp.Controllers
         public IActionResult Random()
         {
             var firstBook = new Book() { Author = "Random author", Title = "Random title" };
-            return View(firstBook);
+            return RedirectToAction("Index", "Home", new { page = 1, sortBy = "title" });
         }
 
 
