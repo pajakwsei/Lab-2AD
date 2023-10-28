@@ -12,5 +12,6 @@ namespace LibApp.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
     }
 }
