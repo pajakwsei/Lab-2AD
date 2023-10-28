@@ -4,7 +4,7 @@
     ViewBag.Title = "Random book";
     Layout = "~/Views/Shared/_Layout.cshtml";
     // var book = ViewBag.Book as Book;
-    var book = ViewData["FirstBook"] as Book; // casting is required here
+    //var book = ViewData["FirstBook"] as Book; // casting is required here
 }
 
 @*Use for direct object passing from controller return type f.e. return View(firstBook)*@
@@ -13,8 +13,12 @@
 @*Use for ViewBag or ViewData*@
 @*<h2>@book.Title</h2>*@
 
+
+@{
+    var className = Model.Customers.Count == 5 ? "popular" : null;
+}
 @*Use for direct ViewModel object passing from controller return type f.e. return View(randomBooksViewModel)*@
-<h2>@Model.Book.Title</h2>
+<h2 class="@className">@Model.Book.Title</h2>
 
 <ul>
     @if (Model.Customers.Count == 0)
