@@ -1,4 +1,5 @@
 ﻿using LibApp.Models;
+using LibApp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -74,10 +75,22 @@ namespace LibApp.Controllers
         {
             var firstBook = new Book() { Author = "Random author", Title = "Random title" };
 
-            ViewBag.Book = firstBook;
-            ViewData["FirstBook"] = firstBook;
+            // ViewBag.Book = firstBook;
+            // ViewData["FirstBook"] = firstBook;
 
-            return View();
+            var customers = new List<Customer>
+            {
+                new Customer { Name = "Customer 1" },
+                new Customer { Name = "Customer 2" }
+            };
+
+            var randomBookViewModel = new RandomBooksViewModel
+            {
+                Book = firstBook,
+                Customers = customers
+            };
+
+            return View(randomBookViewModel);
             //return RedirectToAction("Index", "Book", new { page = 1, sortBy = "title" });
         }
 

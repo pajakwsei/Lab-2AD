@@ -1,4 +1,4 @@
-﻿@model LibApp.Models.Book
+﻿@model LibApp.ViewModels.RandomBooksViewModel
 
 @{
     ViewBag.Title = "Random book";
@@ -11,4 +11,19 @@
 @*<h2>@Model.Title</h2>*@
 
 @*Use for ViewBag or ViewData*@
-<h2>@book.Title</h2>
+@*<h2>@book.Title</h2>*@
+
+@*Use for direct ViewModel object passing from controller return type f.e. return View(randomBooksViewModel)*@
+<h2>@Model.Book.Title</h2>
+
+<ul>
+    @if (Model.Customers.Count == 0)
+    {
+        <p>No one has rented this book yet</p>
+    }
+    else
+    foreach (var customer in Model.Customers)
+    {
+        <li>@customer.Name</li>
+    }
+</ul>
