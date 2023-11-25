@@ -1,0 +1,16 @@
+﻿@model LibApp.Models.Book
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+<ul>
+    <li>Author: @Model.Author</li>
+    <li>Genre: @Model.Genre.Name</li>
+    @if (Model.ReleaseDate.HasValue)
+    {
+        <li>Release date: @Model.ReleaseDate.Value.ToShortDateString()</li>
+    }
+</ul>
