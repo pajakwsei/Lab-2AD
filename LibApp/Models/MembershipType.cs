@@ -11,5 +11,11 @@ namespace LibApp.Models
         public byte SignUpFee { get; set; }
         public byte DurationInMonths { get; set; }
         public byte DiscountRate { get; set; }
+
+        public static readonly int Unknown = 0;
+        public static readonly int PayAsYouGo = 1;
+        public static readonly int Monthly = 2;
+        public static readonly int Quaterly = 3;
+        public static readonly int Annually = 4;
     }
 }

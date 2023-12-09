@@ -11,12 +11,14 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.Name)
         @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Name)
     </div>
     <div class="form-group">
 @*        <label for="Birthdate" class="form-label">Date of Birth</label>
         <input type="text" class="form-control" id="Birthdate" />*@
         @Html.LabelFor(m => m.Customer.Birthdate)
         @Html.TextBoxFor(m => m.Customer.Birthdate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Birthdate)
     </div>
     <div class="form-check">
         <label class="form-check-label" for="flexCheckDefault">
@@ -30,6 +32,7 @@
     </div>
 
     @Html.HiddenFor(m => m.Customer.Id)
+    @Html.ValidationSummary()
     <button type="submit" class="btn btn-primary">Save</button>
 
 }
