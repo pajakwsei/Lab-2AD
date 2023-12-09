@@ -15,10 +15,10 @@ namespace LibApp.Models
                 if (!context.MembershipTypes.Any())
                 {
                     context.MembershipTypes.AddRange(
-                        new MembershipType { SignUpFee = 0, DurationInMonths = 0, DiscountRate = 0 },
-                        new MembershipType { SignUpFee = 30, DurationInMonths = 3, DiscountRate = 5 },
-                        new MembershipType { SignUpFee = 90, DurationInMonths = 6, DiscountRate = 10 },
-                        new MembershipType { SignUpFee = 150, DurationInMonths = 12, DiscountRate = 20 }
+                        new MembershipType { Name = "Pay as you go", SignUpFee = 0, DurationInMonths = 0, DiscountRate = 0 },
+                        new MembershipType { Name = "Monthly", SignUpFee = 30, DurationInMonths = 3, DiscountRate = 5 },
+                        new MembershipType { Name = "Quaterly", SignUpFee = 90, DurationInMonths = 6, DiscountRate = 10 },
+                        new MembershipType { Name = "Annually", SignUpFee = 150, DurationInMonths = 12, DiscountRate = 20 }
                     );
                 }
 

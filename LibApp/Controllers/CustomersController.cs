@@ -38,9 +38,39 @@ namespace LibApp.Controllers
             return View(customer);
         }
 
-        public IActionResult New()
+        public IActionResult CustomerForm()
         {
-            return View();
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new NewCustomerViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("CustomerForm", viewModel);
         }
 
         private ApplicationDbContext _context;
