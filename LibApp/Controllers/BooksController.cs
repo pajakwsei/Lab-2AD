@@ -31,7 +31,7 @@ namespace LibApp.Controllers
             var viewModel = new BookFormViewModel
             {
                 Book = book,
-                Genres = _context.Genre.ToList()
+                Genres = _context.Genres.ToList()
             };
 
             return View("BookForm", viewModel);
@@ -64,7 +64,7 @@ namespace LibApp.Controllers
 
         public IActionResult New()
         {
-            var genres = _context.Genre.ToList();
+            var genres = _context.Genres.ToList();
             var viewModel = new BookFormViewModel
             {
                 Genres = genres
@@ -84,7 +84,7 @@ namespace LibApp.Controllers
             else
             {
                 var bookInDb = _context.Books.SingleOrDefault(b => b.Id == book.Id);
-                bookInDb.Name = book.Name;
+                bookInDb.Title = book.Title;
                 bookInDb.GenreId = book.GenreId;
                 bookInDb.ReleaseDate = book.ReleaseDate;
                 bookInDb.NumberInStock = book.NumberInStock;
