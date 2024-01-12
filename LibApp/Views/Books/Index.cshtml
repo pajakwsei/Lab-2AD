@@ -5,30 +5,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Customers</h2>
+<h2>Books</h2>
 
-@if (!Model.Any())
-{
-    <p>There are no books yet.</p>
-}
-else
-{
-    <table class="table table-hover">
-        <thead>
+<p>
+    <a class="btn btn-primary" asp-action="New">New Book</a>
+</p>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th colspan="2">Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
             <tr>
-                <th colspan="1">Book</th>
-                <th colspan="2">Genre</th>
+                <td><a asp-action="Edit" asp-route-id="@book.Id">@Html.DisplayFor(modelItem => book.Title)</a></td>
+                <td>@book.Genre.Name</td>
+                <td><a asp-action="Details" asp-route-id="@book.Id">Details</a></td>
+
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var book in Model)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => book.Title)</td>
-                    <td>@book.Genre.Name</td>
-                    <td><a asp-action="Details" asp-route-id="@book.Id">Details</a></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>
