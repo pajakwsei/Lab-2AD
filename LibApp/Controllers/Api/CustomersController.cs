@@ -3,6 +3,8 @@ using LibApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using AutoMapper;
+using LibApp.Dtos;
 
 namespace LibApp.Controllers.Api
 {
@@ -10,16 +12,17 @@ namespace LibApp.Controllers.Api
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        public CustomersController(ApplicationDbContext context)
+        public CustomersController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET /api/customers
         [HttpGet]
         public IActionResult GetCustomers()
         {
-            return Ok(_context.Customers.ToList());
+            return Ok(_context.Customers.ToList().Select(_mapper.Map<Customer, CustomerDto>));
         }
 
         // GET /api/customers/{id}
@@ -32,26 +35,26 @@ namespace LibApp.Controllers.Api
                 return NotFound();
             }
 
-            return Ok(customer);
+            return Ok(_mapper.Map<CustomerDto>(customer));
         }
 
         // POST /api/customers
         [HttpPost]
-        public IActionResult CreateCustomer(Customer customer)
+        public IActionResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            _context.Customers.Add(customer);
+            _context.Customers.Add(_mapper.Map<Customer>(customerDto));
             _context.SaveChanges();
-            return Ok(customer);
+            return Ok(customerDto);
         }
 
         // PUT /api/customers/{id}
         [HttpPut("{id}")]
-        public IActionResult UpdateCustomer(int id, Customer customer)
+        public IActionResult UpdateCustomer(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
             {
@@ -64,12 +67,9 @@ namespace LibApp.Controllers.Api
                 return NotFound();
             }
 
-            customerInDb.Name = customer.Name;
-            customerInDb.HasNewsletterSubscribed = customer.HasNewsletterSubscribed;
-            customerInDb.Birthdate = customer.Birthdate;
-            customerInDb.MembershipTypeId = customer.MembershipTypeId;
+            _mapper.Map(customerDto, customerInDb);
 
-            return Ok(customerInDb);
+            return Ok(customerDto);
         }
 
         // DELETE /api/customers/{id}
@@ -88,7 +88,7 @@ namespace LibApp.Controllers.Api
             return Ok(customerInDb);
         }
 
-
         private ApplicationDbContext _context;
+        private IMapper _mapper;
     }
 }
