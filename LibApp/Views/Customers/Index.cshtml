@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@* jQuery tutorial - https://www.impressivewebs.com/jquery-tutorial-for-beginners/*@
+
 <h2>Customers</h2>
 <a class="btn btn-primary" asp-action="CustomerForm">New Customer</a>
 
@@ -14,11 +16,12 @@
 }
 else
 {
-    <table class="table table-hover">
+    <table class="table table-hover" id="customers">
         <thead>
             <tr>
                 <th colspan="1">Customer</th>
                 <th colspan="2">Membership type</th>
+                <th>Delete customer</th>
             </tr>
         </thead>
         <tbody>
@@ -28,8 +31,22 @@ else
                     <td><a asp-action="Edit" asp-route-id="@customer.Id">@Html.DisplayFor(modelItem => customer.Name)</a></td>
                     <td>@customer.MembershipType.Name</td>
                     <td><a asp-action="Details" asp-route-id="@customer.Id">Details</a></td>
+                    <td><button class="btn btn-secondary js-delete" data-customer-id="@customer.Id">Delete</button></td>
                 </tr>
             }
         </tbody>
     </table>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#customers .js-delete").on("click", function() {
+                if (confirm("Confirm customer deletion?"))
+                {
+                    console.log("ID: " + $(this).attr("data-customer-id"));
+                }
+            });
+        });
+    </script>
 }
