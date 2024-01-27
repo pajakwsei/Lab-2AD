@@ -49,7 +49,7 @@ namespace LibApp.Controllers.Api
 
             _context.Customers.Add(_mapper.Map<Customer>(customerDto));
             _context.SaveChanges();
-            return CreatedAtRoute("GetCustomer", new { id = customerDto.Id }, customerDto);
+            return CreatedAtRoute(nameof(GetCustomer), new { id = customerDto.Id }, customerDto);
         }
 
         // PUT /api/customers/{id}
