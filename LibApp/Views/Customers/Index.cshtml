@@ -44,7 +44,15 @@ else
             $("#customers .js-delete").on("click", function() {
                 if (confirm("Confirm customer deletion?"))
                 {
-                    console.log("ID: " + $(this).attr("data-customer-id"));
+                    var button = $(this);
+                    console.log("ID: " + button.attr("data-customer-id"));
+                    $.ajax({
+                        url: "/api/customers/" + button.attr("data-customer-id"),
+                        method: "DELETE",
+                        success: function() {
+                            button.parents("tr").remove();
+                        }
+                    });
                 }
             });
         });
