@@ -20,6 +20,7 @@ namespace LibApp.Controllers.Api
 
         // GET /api/customers
         [HttpGet]
+        [Produces("application/xml")]
         public IActionResult GetCustomers()
         {
             return Ok(_context.Customers.ToList().Select(_mapper.Map<Customer, CustomerDto>));
