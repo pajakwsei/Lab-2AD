@@ -12,5 +12,6 @@ namespace LibApp.Dtos
         public DateTime? Birthdate { get; set; }
         public int MembershipTypeId { get; set; }
         public bool HasNewsletterSubscribed { get; set; }
+        public MembershipTypeDto MembershipType { get; set; }
     }
 }
